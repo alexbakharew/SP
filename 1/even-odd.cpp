@@ -47,6 +47,5 @@ int main(){
                          yyyy));
  newline();
  std::cin.get();
- return 0;
 }
 

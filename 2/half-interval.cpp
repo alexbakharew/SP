@@ -44,6 +44,7 @@ double __BAT__try(double neg__point, double pos__point)
 }
 double root(double a, double b)
 {
+	display(" BAT variant 6");newline();
 	display("interval=\t[");
 	display(a);
 	display(" , ");
