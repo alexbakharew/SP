@@ -1,6 +1,6 @@
 #include "mlisp.h"
-double dd = 1;
-double mm = 9;
+double dd = 18;
+double mm = 01;
 double yyyy = 1998; 
 double even__bits(double);
 double odd__bits(double);
