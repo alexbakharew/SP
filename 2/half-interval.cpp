@@ -26,7 +26,7 @@ double half__interval__metod(double a, double b)
 		double b__value = fun(b);
 		return ((a__value < 0 && b__value > 0) ? __BAT__try(a, b)
 		: (a__value > 0 && b__value < 0) ? __BAT__try(b, a)
-		: b += 1);
+		: b = b + 1);
 
 	}
 }
@@ -37,8 +37,8 @@ double __BAT__try(double neg__point, double pos__point)
 		double test__value = 0;
 		display("+");
 		return(close__enough_Q(neg__point, pos__point) ? midpoint
- 	    : fun(midpoint) > 0 ? __BAT__try(neg__point, midpoint)
-		: fun(midpoint) < 0 ? __BAT__try(midpoint, pos__point)	
+ 	    : test__value = fun(midpoint), test__value > 0 ? __BAT__try(neg__point, midpoint)
+		: test__value < 0 ? __BAT__try(midpoint, pos__point)	
 		: midpoint);
 	}
 }
@@ -57,12 +57,12 @@ double root(double a, double b)
 		display(fun(temp));
 		newline();
 		display("root=\t\t");
-		display(((temp - b - 1) == 0) ? "[bad]" : "[good]");//  (display(if(=(- temp b 1)0)"[bad]" "[good]"))
-		display(temp);
+		display(((temp - b - 1) == 0) ? "[bad]" : "[good]");
+		return temp;
 	}
 }
 int main()
 {
-	root(2, 3);
+	display(root(2,3));
 	std::cin.get();
 }

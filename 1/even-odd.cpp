@@ -22,9 +22,8 @@ double odd__bits(double n)
  double display__bin(double n)
  {
  	 display(remainder(n,2));
-	 (n == 0 ? 0 
-	  : display__bin(quotient(n,2)));
-	  return 0;	
+	 return (n == 0 ? 0 
+	  : display__bin(quotient(n,2)));	
  }
  double report__results(double n)
  {
