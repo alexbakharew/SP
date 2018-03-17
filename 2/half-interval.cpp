@@ -17,7 +17,7 @@ double average(double a, double b)
 }
 bool close__enough_Q(double x, double y)
 {
-  abs(x - y) < tolerance ? true : false;
+	return abs(x - y) < tolerance;
 }
 double half__interval__metod(double a, double b)
 {
@@ -37,14 +37,14 @@ double __BAT__try(double neg__point, double pos__point)
 		double test__value = 0;
 		display("+");
 		return(close__enough_Q(neg__point, pos__point) ? midpoint
- 	    : test__value = fun(midpoint), test__value > 0 ? __BAT__try(neg__point, midpoint)
+ 	    : true ? test__value = fun(midpoint), test__value > 0 ? __BAT__try(neg__point, midpoint)
 		: test__value < 0 ? __BAT__try(midpoint, pos__point)	
-		: midpoint);
+		: midpoint
+		: _infinity);
 	}
 }
 double root(double a, double b)
 {
-	display(" BAT variant 6");newline();
 	display("interval=\t[");
 	display(a);
 	display(" , ");
@@ -63,6 +63,7 @@ double root(double a, double b)
 }
 int main()
 {
+	display(" BAT variant 6");newline();
 	display(root(2,3));
 	std::cin.get();
 }
