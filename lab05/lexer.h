@@ -3,7 +3,7 @@
 #define LEXER_H
 #include "baselexer.h"
 //********************************************
-//*        Developed by  xxx		     *
+//*        Developed by  BAT		     *
 //*             (c)  2018                    *
 //********************************************
 class tLexer:public tBaseLexer{
@@ -37,12 +37,15 @@ public:
 //2
   addstr(Adec,2,".",3);
   addrange(Adec,2,'1','9',1);
+  addstr(Adec,2,"0",4);
 //3
   addrange(Adec,3,'0','9',3);
   addstr(Adec,3,"e",5);
   addstr(Adec,3,"E",5);
 //4
   addstr(Adec,4,".",3);
+  addstr(Adec,4,"e",5);
+  addstr(Adec,4,"E",5);
 //5
   addstr(Adec,5,"+",9);
   addstr(Adec,5,"-",9);
@@ -54,21 +57,25 @@ public:
   addstr(Adec,7,"+",8);
   addstr(Adec,7,"-",8);
 //8
-  addrange(Adec,8,'0','9',8);
+  addrange(Adec,8,'0','9',10);
 //9
   addrange(Adec,9,'0','9',9);
+//10
+  addrange(Adec,10,'0','9',10);
 //......................
  Adec.final(1);
  Adec.final(3);
  Adec.final(6);
- Adec.final(8);
  Adec.final(9);
+ Adec.final(10);
 ///////////////////////
 //________________________________________
 // идентификатор
 //0
     addrange(Aid,0,'a','z',1);
     addrange(Aid,0,'A','Z',1);
+    addstr(Aid,0,"!",1);
+    
 //1
     addrange(Aid,1,'a','z',1);
     addrange(Aid,1,'A','Z',1);
@@ -83,6 +90,8 @@ public:
     addrange(Aidq,0,'a','z',1);
     addrange(Aidq,0,'A','Z',1);
     addstr(Aidq,0,"-",1);
+    addstr(Aidq,0,"?",2);
+    
 //1
     addrange(Aidq,1,'a','z',1);
     addrange(Aidq,1,'A','Z',1);
