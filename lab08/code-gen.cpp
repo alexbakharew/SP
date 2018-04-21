@@ -41,11 +41,23 @@ int tCG::p06(){
 // BOOL -> REL
   int tCG::p07(){return 0;}
 // BOOL -> ( not BOOL )
-  int tCG::p08(){return 0;}//?????????
+  int tCG::p08()
+  {
+    S1->obj = "!(" + S3->obj + ")";
+    return 0;
+  }//?????????
 // REL -> HREL E1 )
-  int tCG::p09(){return 0;}//?????????
+  int tCG::p09()
+  {
+    S1->obj = S1->obj + S2->obj + ")";
+    return 0;
+    }//?????????
 // HREL -> ( = E
-  int tCG::p10(){return 0;}//?????????
+  int tCG::p10()
+  {
+    S1->obj = "(" + S3->obj + "==";
+    return 0;
+  }//?????????
 // E -> $id
 int tCG::p11(){
  S1->obj = decor(S1->name);
@@ -58,11 +70,26 @@ int tCG::p11(){
 // E1 -> E
   int tCG::p14(){return 0;}
 // CPROC -> HCPROC )
-  int tCG::p15(){return 0;}//?????????
+  int tCG::p15()
+  {
+    S1->obj += ")";
+    return 0;
+  }//?????????
 // HCPROC -> ( $id
-  int tCG::p16(){return 0;}//?????????
+  int tCG::p16()
+  {
+    S1->obj = decor(S2->name) + "(";
+    return 0;
+  }//?????????
 // HCPROC -> HCPROC E
-  int tCG::p17(){return 0;}//?????????
+  int tCG::p17()
+  {
+    if(S1->count > 0)
+        S1->obj += ", ";
+    S1->obj = S1->obj + S2->obj;
+    ++S1->count;
+    return 0;
+  }//?????????
 // CONST -> $zero
 int tCG::p18(){
  S1->obj = "0";
