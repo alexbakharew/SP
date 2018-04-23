@@ -53,6 +53,7 @@ int tCG::p16(){ //        E -> MUL
 	return 0;}
 int tCG::p17(){ //    CPROC -> HCPROC )
 //????
+	S1->obj = S2->obj + ")";
 	return 0;}
 int tCG::p18(){ //   HCPROC -> ( $id
 //????
@@ -75,23 +76,29 @@ int tCG::p22(){ //     HMUL -> HMUL E1
 	return 0;}
 int tCG::p23(){ //     BOOL -> $bool
 //????
+	S1->obj = (S1->name=="#t" ? "true" : "false");
 	return 0;}
 int tCG::p24(){ //     BOOL -> REL
 	return 0;}
 int tCG::p25(){ //     BOOL -> ( not BOOL )
 //????
+	S1->obj = "!(" + S3->obj + ")";
 	return 0;}
 int tCG::p26(){ //      REL -> HREL E1 )
 //????
+	S1->obj = S2->obj + S3->obj + ")";
 	return 0;}
 int tCG::p27(){ //     HREL -> ( = E
 //????
+	S1->obj = "( " + S3->obj + " == "; 
 	return 0;}
 int tCG::p28(){ //      SET -> HSET E1 )
 //????
+	S1->obj = S2->obj + S3->obj + ")";
 	return 0;}
 int tCG::p29(){ //     HSET -> ( set! $id
 //????
+	S1->obj = decor(S3->name) + " = ";
 	return 0;}
 int tCG::p30(){ //      DEF -> PROC
 	return 0;}
@@ -99,21 +106,26 @@ int tCG::p31(){ //     DEFS -> DEF
 	return 0;}
 int tCG::p32(){ //     DEFS -> DEFS DEF
 //????
+	S1->obj += S2->obj;
 	return 0;}
 int tCG::p33(){ //   PROC -> HPROC E1 )
 //????
+	S1->obj = S2->obj + S3->obj + ")";
 	return 0;}
 int tCG::p34(){ //    HPROC -> PCPAR )
 //????
 	return 0;}
 int tCG::p35(){ //    HPROC -> HPROC SET
+	S1->obj += S2->obj;
 //????
 	return 0;}
 int tCG::p36(){ //    PCPAR -> ( define ( $id
 //????
+	S1->obj = "double " + decor(S4->name) ";";
 	return 0;}
 int tCG::p37(){ //    PCPAR -> PCPAR $id
 //????
+	S1->obj += decor(S2->name);
 	return 0;}
 //_____________________
 int tCG::p38(){return 0;} int tCG::p39(){return 0;} 

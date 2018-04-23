@@ -1,0 +1,99 @@
+# $f04
+    $id    $idq    $dec   $zero 
+  $bool    $str       (       ) 
+      +       -       *       / 
+      <       =       >      <= 
+     >=     and     not      or 
+   cond    else      if     let 
+ define display newline    set! 
+
+#
+      S -> PROG #1
+   PROG -> CALCS1 #2 |
+           DEFS #3 |
+           DEFS CALCS1 #4
+ CALCS1 -> CALCS #5
+  CALCS -> CALC #6 |
+           CALCS CALC #7
+   CALC -> E1 #8 |
+           BOOL #9 |
+           STR #10 |
+           DISPSET #11
+     E1 -> E #12
+      E -> $id #13 |
+           CONST #14 |
+           ADD #15 |
+           SUB #16 |
+           DIV #17 |
+           MUL #18 |
+           COND #19 |
+           CPROC #20
+  CONST -> $zero #21 |
+           $dec #22
+    ADD -> HADD E1 ) #23
+   HADD -> ( + #24 |
+           HADD E1 #25
+    SUB -> HSUB E1 ) #26
+   HSUB -> ( - #27 |
+           HSUB E1 #28
+    DIV -> ( / E1 ) #29
+    MUL -> HMUL E1 ) #30
+   HMUL -> ( * #31 |
+           HMUL E1 #32
+   COND -> HCOND ELSE ) #33
+  HCOND -> ( cond CLAUS #34
+  CLAUS -> HCLAUS E1 ) #35
+ HCLAUS -> ( BOOL #36 |
+           HCLAUS DISPSET #37
+   ELSE -> HELSE E1 ) #38
+  HELSE -> ( else #39 |
+           HELSE DISPSET #40
+  CPROC -> HCPROC ) #41
+ HCPROC -> ( $id #42 |
+           HCPROC E #43
+   BOOL -> $bool #44 |
+           CPRED #45 |
+           REL #46 |
+           OR #47 |
+           ( not BOOL ) #48
+  CPRED -> HCPRED ) #49
+ HCPRED -> ( $idq #50 |
+           HCPRED E #51
+    REL -> HREL E1 ) #52
+   HREL -> ( < E #53 |
+           ( = E #54
+     OR -> HOR BOOL ) #55
+    HOR -> ( or #56 |
+           HOR BOOL #57
+    STR -> $str #58
+    SET -> HSET E1 ) #59
+   HSET -> ( set! $id #60
+DISPSET -> ( display E1 ) #61 |
+           ( display BOOL ) #62 |
+           ( display STR ) #63 |
+           ( newline ) #64 |
+           SET #65
+   DEFS -> DEF #66 |
+           DEFS DEF #67
+    DEF -> PRED #68 |
+           VAR #69 |
+           PROC #70
+   PRED -> HPRED BOOL ) #71
+  HPRED -> PDPAR ) #72
+  PDPAR -> ( define ( $idq #73 |
+           PDPAR $id #74
+    VAR -> VARINI ) #75
+ VARINI -> HVAR CONST #76
+   HVAR -> ( define $id #77
+   PROC -> HPROC LETLOC ) #78 |
+           HPROC E1 ) #79
+  HPROC -> PCPAR ) #80 |
+           HPROC DISPSET #81
+  PCPAR -> ( define ( $id #82 |
+           PCPAR $id #83
+ LETLOC -> HLETLOC E1 ) #84
+HLETLOC -> LTVAR ) #85 |
+           HLETLOC DISPSET #86
+  LTVAR -> ( let ( CPROC #87 |
+           LTVAR CPROC #88
+
