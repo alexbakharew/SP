@@ -2,7 +2,7 @@
 #include "mlisp.h"
 //________________ 
 int main(){
- display(7); newline();
+ display(tpro); newline();
  std::cin.get();
  return 0;
 }

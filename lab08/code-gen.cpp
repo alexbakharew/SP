@@ -43,7 +43,7 @@ int tCG::p06(){
 // BOOL -> ( not BOOL )
   int tCG::p08()
   {
-    S1->obj = "!(" + S3->obj + ")";
+    S1->obj = "(!" + S3->obj + ")";
     return 0;
   }//?????????
 // REL -> HREL E1 )
@@ -86,7 +86,7 @@ int tCG::p11(){
   {
     if(S1->count > 0)
         S1->obj += ", ";
-    S1->obj = S1->obj + S2->obj;
+    S1->obj += S2->obj;
     ++S1->count;
     return 0;
   }//?????????
