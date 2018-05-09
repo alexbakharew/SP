@@ -19,7 +19,8 @@ int tCG::p03(){ //     PROG -> DEFS
 	return 0;}
 int tCG::p04(){ //     PROG -> DEFS CALCS1
 //?????????
-	S1->obj = S2->obj + S3->obj;
+	S1->obj += "int main(){\n" + S2->obj
+    + " std::cin.get();\n return 0;\n}\n";
 	return 0;}
 int tCG::p05(){ //   CALCS1 -> CALCS
 	return 0;}
@@ -60,12 +61,14 @@ int tCG::p17(){ //    CPROC -> HCPROC )
 	return 0;}
 int tCG::p18(){ //   HCPROC -> ( $id
 //????
-	S1->obj = "(" + decor(S2->name);
+	S1->obj = decor(S2->name) + "(";
+	S1->count = 0;
 	return 0;}
 int tCG::p19(){ //   HCPROC -> HCPROC E
 //????
-	if (S1->count > 0) {
-	S1->obj += ", ";
+	if (S1->count > 0) 
+	{
+		S1->obj += ", ";
 	}
 	S1->obj += S2->obj;
 	++S1->count;
@@ -121,7 +124,7 @@ int tCG::p32(){ //     DEFS -> DEFS DEF
 	return 0;}
 int tCG::p33(){ //   PROC -> HPROC E1 )
 //????
-	S1->obj += "\treturn " +  S2->obj + S3->obj + ";\n}\n";
+	S1->obj += "return " +  S2->obj + S3->obj + ";\n}\n";
 	return 0;}
 int tCG::p34(){ //    HPROC -> PCPAR )
 //????
