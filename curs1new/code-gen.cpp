@@ -39,7 +39,7 @@ int tCG::p07(){ //  CALCS -> CALCS CALC
 	return 0;}
 
 int tCG::p08(){ //   CALC -> E1
-	S1->obj = " display("+S1->obj+"); newline();\n";
+	S1->obj = " display(" + S1->obj + "); newline();\n";
 	return 0;}
 
 int tCG::p09(){ //   CALC -> BOOL
@@ -50,16 +50,17 @@ int tCG::p10(){ //   CALC -> STR
 	S1->obj = " display(" + S1->obj + "); newline();\n";
 	return 0;}
 
-int tCG::p11(){ //   CALC -> DISPSET
+int tCG::p11(){ //   CALC -> DISPSET 
+	S1->obj +=";\n";
 
 	return 0;}
 
 int tCG::p12(){ //     E1 -> E
-	S1->obj = decor(S1->name);
+	//S1->obj = decor(S1->name);
 	return 0;}
 
 int tCG::p13(){ //      E -> $id
-	S1->obj = S1->name;
+	S1->obj = decor(S1->name);
 	return 0;}
 
 int tCG::p14(){ //      E -> $zero
@@ -67,23 +68,23 @@ int tCG::p14(){ //      E -> $zero
 	return 0;}
 
 int tCG::p15(){ //      E -> ADD
-	S1->obj = "(" + S1->obj;
-	S1->obj += ")";
+	// S1->obj = "(" + S1->obj;
+	// S1->obj += ")";
 	return 0;}
 
 int tCG::p16(){ //      E -> SUB
-	S1->obj = "(" + S1->obj;
-	S1->obj += ")";
+	// S1->obj = "(" + S1->obj;
+	// S1->obj += ")";
 	return 0;}
 
 int tCG::p17(){ //      E -> DIV
-	S1->obj = "(" + S1->obj;
-	S1->obj += ")";
+	// S1->obj = "(" + S1->obj;
+	// S1->obj += ")";
 	return 0;}
 
 int tCG::p18(){ //      E -> MUL
-	S1->obj = "(" + S1->obj;
-	S1->obj += ")";
+	// S1->obj = "(" + S1->obj;
+	// S1->obj += ")";
 	return 0;}
 
 int tCG::p19(){ //      E -> COND
@@ -99,6 +100,7 @@ int tCG::p21(){ //    ADD -> HADD E1 )
 	return 0;}
 
 int tCG::p22(){ //   HADD -> ( +
+	S1->count = 0;
 	S1->obj = "(";
 	return 0;}
 
@@ -107,23 +109,21 @@ int tCG::p23(){ //   HADD -> HADD E1
 	return 0;}
 
 int tCG::p24(){ //    SUB -> HSUB E1 )
-	if (S1->count == 1){
-		S1->obj += "-" + S2->obj + ")";
-	} 
-	else{
-		S1->obj += S2->obj + ")";
-	}
+	S1->obj += S2->obj + ")";
+	
 	return 0;}
 
-int tCG::p25(){ //   HSUB -> ( - E
+int tCG::p25(){ //   HSUB -> ( - E 
+	S1->count = 0;
+	S1->obj = "(" + S3->obj + " - ";
 	return 0;}
 
 int tCG::p26(){ //    DIV -> HDIV E1 )
 	if (S1->count == 1){
 		S1->obj += "1 / " + S2->obj + ")";
-	} else{
+	} else
 		S1->obj += S2->obj + ")";
-	}
+	
 	return 0;}
 
 int tCG::p27(){ //   HDIV -> ( /
@@ -153,7 +153,8 @@ int tCG::p32(){ //   COND -> HCOND ELSE )
 	return 0;}
 
 int tCG::p33(){ //  HCOND -> ( cond
-	//empty
+	// S1->obj = "(";
+	// S1->count = 0;
 	return 0;}
 
 int tCG::p34(){ //  HCOND -> HCOND CLAUS
@@ -161,37 +162,36 @@ int tCG::p34(){ //  HCOND -> HCOND CLAUS
 	return 0;}
 
 int tCG::p35(){ //  CLAUS -> HCLAUS E1 )
-	S1->obj += "(" + S2->obj + ") :\n";
+	S1->obj += S2->obj + " : \n\t  ";
 	return 0;}
 
 int tCG::p36(){ // HCLAUS -> ( BOOL
-	S1->obj = "(" + S2->obj + ") ? ";
+	S1->obj = S2->obj + " ? ";
 	return 0;}
 
-int tCG::p37(){ // HCLAUS -> HCLAUS DISPSET
-	S1->obj +="(" + S2->obj + "),"; //?????????????????????
+int tCG::p37(){ // HCLAUS -> HCLAUS DISPSET          
+	S1->obj += S2->obj + ", ";
 	return 0;}
 
-int tCG::p38(){ //   ELSE -> HELSE E1 )
-	if (S1->count > 0)
-		S1->obj += ",\n";
-	S1->obj += S2->obj + ")";
+int tCG::p38(){ //   ELSE -> HELSE E1 ) @@
+	// if(S1->count) S1->obj+=",";
+	// S1->obj += S2->obj;
 	return 0;}
 
 int tCG::p39(){ //  HELSE -> ( else
-	S1->obj = "(";
-	S1->count = 0;
+	// S1->count = 0;
+	// S1->obj="\n: ";
 	return 0;}
 
-int tCG::p40(){ //  HELSE -> HELSE DISPSET
-	if (S1->count > 0) //?????????????????????????????????????
-		S1->obj += ",\n";
-	S1->obj += S2->obj;
-	++S1->count;
+int tCG::p40(){ //  HELSE -> HELSE DISPSET            @
+	// if(S1->count) S1->obj+=",";
+	// S1->obj+=S2->obj;	
+	// ++S1->count;
 	return 0;}
 
 int tCG::p41(){ //  CPROC -> HCPROC )
 	S1->obj += ")";
+	S1->count = 0;
 	return 0;}
 
 int tCG::p42(){ // HCPROC -> ( $id
@@ -200,10 +200,9 @@ int tCG::p42(){ // HCPROC -> ( $id
 	return 0;}
 
 int tCG::p43(){ // HCPROC -> HCPROC E
-	if (S1->count > 0)
-		S1->obj += ", ";
+	if(S1->count) S1->obj += ", ";
 	S1->obj += S2->obj;
-	++S1->count;
+	++(S1->count);
 	return 0;}
 
 int tCG::p44(){ //   BOOL -> $bool
@@ -236,11 +235,9 @@ int tCG::p50(){ // HCPRED -> ( $idq
 	return 0;}
 
 int tCG::p51(){ // HCPRED -> HCPRED E
-	if (S1->count > 0)
-		S1->obj += ", ";
-
+	if(S1->count) S1->obj += ", ";
 	S1->obj += S2->obj;
-	++S1->count;
+	++(S1->count);
 	return 0;}
 
 int tCG::p52(){ //    REL -> HREL E1 )
@@ -279,24 +276,23 @@ int tCG::p60(){ //   HSET -> ( set! $id
 	S1->obj = decor(S3->name) + " = ";
 	return 0;}
 
-int tCG::p61(){ //DISPSET -> ( display E1 )
+int tCG::p61(){ //DISPSET -> ( display E1 )  @
 	S1->obj = "display(" + S3->obj + ");\n";
 	return 0;}
 
-int tCG::p62(){ //DISPSET -> ( display BOOL )
+int tCG::p62(){ //DISPSET -> ( display BOOL ) @
 	S1->obj = "display(" + S3->obj + ");\n";
 	return 0;}
 
-int tCG::p63(){ //DISPSET -> ( display STR )
+int tCG::p63(){ //DISPSET -> ( display STR ) @
 	S1->obj = "display(" + S3->obj + ");\n";
 	return 0;}
 
-int tCG::p64(){ //DISPSET -> ( newline )
+int tCG::p64(){ //DISPSET -> ( newline ) @
 	S1->obj = "newline();\n";
 	return 0;}
 
-int tCG::p65(){ //DISPSET -> SET
-	//?????????????????????????????????????????????
+int tCG::p65(){ //DISPSET -> SET  @
 	return 0;}
 
 int tCG::p66(){ //   DEFS -> DEF
@@ -311,12 +307,12 @@ int tCG::p68(){ //    DEF -> PRED
 	//empty
 	return 0;}
 
-int tCG::p69(){ //    DEF -> VAR //?????????????????????????????????
-	int pos = static_cast<int>(S1->obj.find("=")) - 1;
-	while (pos >= 0 && S1->obj[pos] == ' ')
-		--pos;
+int tCG::p69(){ //    DEF -> VAR //????????????????????????????????? @
+	// int pos = static_cast<int>(S1->obj.find("=")) - 1;
+	// while (pos >= 0 && S1->obj[pos] == ' ')
+	// 	--pos;
 
-	declarations += "extern " + S1->obj.substr(0, pos + 1) + ";\n";
+	// declarations += "extern " + S1->obj.substr(0, pos + 1) + ";\n";
 	return 0;}
 
 int tCG::p70(){ //    DEF -> PROC
@@ -324,13 +320,13 @@ int tCG::p70(){ //    DEF -> PROC
 	return 0;}
 
 int tCG::p71(){ //   PRED -> HPRED BOOL )
-	S1->obj += S2->obj + ";\n}}\n";
+	S1->obj += "return " + S2->obj +";\n}\n";
 	return 0;}
 
 int tCG::p72(){ //  HPRED -> PDPAR )
 	S1->obj += ")";
 	declarations += S1->obj + ";\n";
-	S1->obj += "\n{{\nreturn ";
+	S1->obj += "{\n";
 	return 0;}
 
 int tCG::p73(){ //  PDPAR -> ( define ( $idq
@@ -347,14 +343,18 @@ int tCG::p74(){ //  PDPAR -> PDPAR $id
 	return 0;}
 
 int tCG::p75(){ //    VAR -> VARINI )
+	declarations += S1->obj;
+	S1->obj = " ";
 
 	return 0;}
 
 int tCG::p76(){ // VARINI -> HVAR $zero stollen2 65
+	S1->obj += " = 0;\n";
 
 	return 0;}
 
 int tCG::p77(){ // VARINI -> HVAR $dec
+	S1->obj += " = " + decor(S2->name) + ";\n";
 	return 0;}
 
 int tCG::p78(){ //   HVAR -> ( define $id
@@ -362,6 +362,7 @@ int tCG::p78(){ //   HVAR -> ( define $id
 	return 0;}
 
 int tCG::p79(){ //   PROC -> HPROC LETLOC )
+	S1->obj += S2->obj + "}\n";
 
 	return 0;}
 
@@ -372,7 +373,7 @@ int tCG::p80(){ //   PROC -> HPROC E1 )
 int tCG::p81(){ //  HPROC -> PCPAR )
 	S1->obj += ")";
 	declarations += S1->obj + ";\n";
-	S1->obj += " {{\n";
+	S1->obj += " {\n";
 	return 0;}
 
 int tCG::p82(){ //  HPROC -> HPROC DISPSET
@@ -393,23 +394,23 @@ int tCG::p84(){ //  PCPAR -> PCPAR $id
 	return 0;}
 
 int tCG::p85(){ // LETLOC -> HLETLOC E1 )
-
+	S1->obj += "return " + S2->obj +";\n}//let\n";
 	return 0;}
 
 int tCG::p86(){ //HLETLOC -> LTVAR )
-
+	S1->obj += ";\n";
 	return 0;}
 
 int tCG::p87(){ //HLETLOC -> HLETLOC DISPSET
-
+	S1->obj += S2->obj + ";\n";
 	return 0;}
 
 int tCG::p88(){ //  LTVAR -> ( let ( CPROC
-
+	S1->obj = "{//let\n double " + S4->obj;
 	return 0;}
 
 int tCG::p89(){ //  LTVAR -> LTVAR CPROC
-
+	S1->obj += ", " + S2->obj ;
 	return 0;}
 
 //_____________________
