@@ -12,18 +12,18 @@ int tCG::p01(){ // S -> PROG
 
 int tCG::p02(){ //   PROG -> CALCS1
 	S1->obj = "int main(){\n" + S1->obj
-    + " std::cin.get();\n return 0;\n}\n";
+    + "std::cin.get();\n return 0;\n}\n";
 	return 0;}
 
 int tCG::p03(){ //   PROG -> DEFS
 	S1->obj += "int main(){\n"
     " display(\"No calculations!\");newline();\n"
-    " std::cin.get();\nreturn 0;\n}\n";
+    "std::cin.get();\nreturn 0;\n}\n";
 	return 0;}
 
 int tCG::p04(){ //   PROG -> DEFS CALCS1
 	S1->obj += "int main(){\n" + S2->obj
-    + " std::cin.get();\n return 0;\n}\n";
+    + "std::cin.get();\n return 0;\n}\n";
 	return 0;}
 
 int tCG::p05(){ // CALCS1 -> CALCS
@@ -51,7 +51,7 @@ int tCG::p10(){ //   CALC -> STR
 	return 0;}
 
 int tCG::p11(){ //   CALC -> DISPSET 
-	S1->obj +=";\n";
+	//S1->obj +="\n";
 
 	return 0;}
 
@@ -367,7 +367,7 @@ int tCG::p79(){ //   PROC -> HPROC LETLOC )
 	return 0;}
 
 int tCG::p80(){ //   PROC -> HPROC E1 )
-	S1->obj += "return " + S2->obj + ";\n}}\n";
+	S1->obj += "return " + S2->obj + ";\n}\n";
 	return 0;}
 
 int tCG::p81(){ //  HPROC -> PCPAR )
