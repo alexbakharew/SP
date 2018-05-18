@@ -2,8 +2,8 @@
 #include "mlisp.h"
 //________________ 
 int main(){
- display(eve__odd); newline();
- std::cin.get();
+ display(h84f); newline();
+std::cin.get();
  return 0;
 }
 

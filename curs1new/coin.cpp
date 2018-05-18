@@ -37,12 +37,12 @@ return ((d100 * mm) + dd);
 int main(){
 display(" BAT variant 3");
 newline();
-display(" 1__2__3__20__25__50");
+display(" 1-2-3-20-25-50");
 newline();
-display("count__change for 100 \t= ");
+display("count-change for 100 \t= ");
 display(count__change(d100));
 newline();
-display("count__change for ");
+display("count-change for ");
 display(GR__AMOUNT());
 display(" \t= ");
 display(count__change(GR__AMOUNT()));

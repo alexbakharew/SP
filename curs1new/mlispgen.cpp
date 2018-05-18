@@ -2,7 +2,6 @@
 #include <iostream>
 #include <iomanip>
 #include "code-gen.h"
-
 #include "basegramma.cpp"
 #include "kngramma.cpp"
 #include "precmat.cpp"

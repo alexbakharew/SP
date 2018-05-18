@@ -1,0 +1,45 @@
+;even-odd
+(define one 1)
+(define two 2)
+(define tm 0)
+(define million 1000000)
+(define ten-thousand 10000)
+(define(even-bits n)
+  (cond((= n 0)one)
+       ((=(remainder n two)0)
+          (even-bits (quotient n two)))
+       (else(odd-bits(quotient n two)))
+       ))
+(define(odd-bits n)
+  (cond((= n 0)0)
+       ((=(remainder n two)0)
+          (odd-bits (quotient n two)))
+       (else(even-bits(quotient n two)))
+       ))
+(define(display-bin n)
+  (display(remainder n two))
+  (cond((= n 0)0)
+       (else(display-bin (quotient n two)))
+       ))
+(define(report-results n)
+  (display "Happy birthday to you!\n")
+  (display n)(display " (decimal)\n")
+  (display "\teven?\t") (display (cond((=(even-bits n)one) "yes") ("no")))
+  
+  (newline)
+  (display "\todd?\t")(display (cond((=(odd-bits n)one) "yes") ("no")))
+  (newline)
+  (set! n(display-bin n))(display "(reversed binary)\n")
+  0
+       )
+;***** Date of YOUR birthday *******
+(define dd 18)
+(define mm 01)
+(define yyyy 1998)
+;***********************************
+(report-results (+ (* dd million)
+                   (* mm ten-thousand)
+                   yyyy))
+
+
+ 

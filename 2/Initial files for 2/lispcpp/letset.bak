@@ -34,8 +34,7 @@
  (display(h 0)) (newline)
  (display a)(newline)
 ;--------------------
-(cond(
-  ((= 5 5) 1) (display 1)
-  ((= 7 9) 1) (display 2)       
-  ))
-   
+(set! tmp
+      (cond ((= 11 11) 5)
+       else 6)
+      tmp)
