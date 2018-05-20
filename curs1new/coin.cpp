@@ -16,20 +16,20 @@ double next__coin(double coin);
 double GR__AMOUNT();
 //________________ 
           double cc(double amount, double largest__coin) {
-return ((amount = 0) || (largest__coin = one)) ? one : 
-	  ((amount <= 0) || (largest__coin <= 0)) ? 0 : 
-	  ;
+return ((amount == 0) || (largest__coin == one)) ? one :
+((amount <= 0) || (largest__coin <= 0)) ? 0 :
+((cc(amount, next__coin(largest__coin)) + cc((amount - largest__coin), largest__coin)));
 }
 double count__change(double amount) {
 return cc(amount, LARGEST__COIN);
 }
 double next__coin(double coin) {
-return (coin = d50) ? d25 : 
-	  (coin = d25) ? d20 : 
-	  (coin = d20) ? three : 
-	  (coin = three) ? two : 
-	  (coin = two) ? one : 
-	  ;
+return (coin == d50) ? d25 :
+(coin == d25) ? d20 :
+(coin == d20) ? three :
+(coin == three) ? two :
+(coin == two) ? one :
+(0);
 }
 double GR__AMOUNT() {
 return ((d100 * mm) + dd);

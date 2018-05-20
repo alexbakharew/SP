@@ -1,7 +1,6 @@
 ;  half-interval.ss 2018
 
 (define one 1)
-(define min-one -1)
 (define two 2.0)
 (define thirty 30)
 (define thirtyone 31)
@@ -14,16 +13,13 @@
   (let((a-value (fun a))
        (b-value (fun b))
       )
-     (cond((and(> 0 a-value)(> b-value 0))
+     (cond((or(<= a-value 0)(<= b-value 0))
                  (try a b))
-         (else
-          (cond ((and(> a-value 0)(> 0 b-value))
+         ((or(<= a-value 0)(<= b-value 0))
                  (try b a))
-         (else (+ b one))
-         )
+         (else(+ b one))
      )
   )
- )
 )
 
 
@@ -35,9 +31,9 @@
      (display "+")
      (cond((close-enough? neg-point pos-point) midpoint)
         (else (set! test-value (fun midpoint))
-            (cond((> test-value 0)(try neg-point midpoint))
+            (cond((not(<= test-value 0))(try neg-point midpoint))
                  (else (cond
-                 ((> 0 test-value)(try midpoint pos-point))
+                 ((not(<= 0 test-value))(try midpoint pos-point))
                  (else midpoint))
                  )
             )
@@ -47,7 +43,7 @@
 )
 
 (define (close-enough? x y)
-  (> tolerance (abs (- x y))))
+  (not(<= tolerance (abs (- x y)))))
 (define (average x y)(* (+ x y) (/ two)))
 (define (root a b)
  (display"interval=\t[")
@@ -60,17 +56,20 @@
       (display"discrepancy=\t")
       (display(fun temp))(newline)
       (display"root=\t\t")
-      (set! x (cond((= (- temp b one)0)(display "[bad]") one)(else (display "[good]") 0)))
+      (set! x (cond((= (- (- temp b) one)0)(display "[bad]") one)(else (display "[good]") two)))
       temp
  )
 )
 (define tolerance 0.00001)
-
+(define d106 106)
+(define d107 107)
+(define d025 0.25)
+(define d12502 1.2502) 
 (define(fun z)
-  (set! z (- z (* thirty (/ thirtyone)) (/ e)))
-  (+ (- z (* five (expt (log (expt (atan (+ z three)) two)) four))) seven)
+  (set! z (-(- z (/ d106 d107))(/ one e)))
+  (+(* d025 (expt z three))
+    (- z d12502))
 )
 
-(display "nys variant 30")
-(newline)
-(root min-one 0)
+" BAT variant 6"
+(root two three)
