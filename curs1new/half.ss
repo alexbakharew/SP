@@ -1,14 +1,8 @@
 ;  half-interval.ss 2018
-
 (define one 1)
 (define two 2.0)
-(define thirty 30)
-(define thirtyone 31)
-(define five 5)
 (define three 3)
 (define four 4)
-(define seven 7)
-
 (define (half-interval-metod a b)
   (let((a-value (fun a))
        (b-value (fun b))
